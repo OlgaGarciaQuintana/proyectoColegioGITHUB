@@ -13,86 +13,31 @@ import jakarta.transaction.Transaction;
 
 public class CursoDAO {
 
-    //INSERTAR:
-    
-        public void insertCurso(Curso c) {
-            org.hibernate.Transaction transaction = null;
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                transaction = session.beginTransaction();
-                session.persist(c);
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction!=null) {
-                    transaction.rollback();
-                }
-            }
-        }
+    public void insertarCurso(Session session, Curso c) {
+		session.persist(c);
+		System.out.println("Curso insertado");
+	}
+	
+	public void actualizarCurso(Session session, Curso c) {
+		session.merge(c);
+		System.out.println("Curso actualizado");
+	}
+	
+	public void deleteCurso(Session session, int idcurso) {
+		Curso c = session.get(Curso.class, idcurso);
+		if (c != null ) {
+			session.remove(c);
+			System.out.println("Curso eliminado");
+		}
+	}
 
-        //UPDATE:
-        
-        public void updateCurso(Curso c) {
-            org.hibernate.Transaction transaction = null;
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                transaction = session.beginTransaction();
-                session.merge(c);
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction!=null) {
-                    transaction.rollback();
-                }
-            }
-        }
-        
-        //BORRADO:
-        
-        public void deleteCurso(int idcurso) {
-            org.hibernate.Transaction transaction = null;
-            Curso c = null;
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                transaction = session.beginTransaction();
-                c = session.get(Curso.class, idcurso);
-                session.remove(c);
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction!=null) {
-                    transaction.rollback();
-                }
-            }
-        }
-        
-        //SELECCION SIMPLE:
-        
-        public Curso selectCursoById(int idcurso) {
-            org.hibernate.Transaction transaction = null;
-            Curso c = null;
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                transaction = session.beginTransaction();
-                c = session.get(Curso.class, idcurso);
-                transaction.commit();
-            } catch (Exception e) {
-                if(transaction!=null) {
-                    transaction.rollback();
-                }
-            }
-            return c;
-        }
-        
-        //SELECCION MULTIPLE:
-        
-        public List<Curso> selectAllCurso() {
-            org.hibernate.Transaction transaction = null;
-            List<Curso> cursos = null;
-            Curso c = null;
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                transaction = session.beginTransaction();
-                cursos=session.createQuery("from Curso", Curso.class).getResultList();
-                transaction.commit();
-            } catch (Exception e) {
-                if(transaction!=null) {
-                    transaction.rollback();
-                }
-            }
-            return cursos;
-        }
+	public Curso selectCursoById(Session session, int idcurso) {
+		return session.get(Curso.class, idcurso);
+	}
+	
+	
+	public List<Curso> selectAllCursos(Session session) {
+		return session.createQuery("FROM Curso", Curso.class).list();
+	}
     
 }

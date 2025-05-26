@@ -11,86 +11,31 @@ import jakarta.transaction.Transaction;
 
 public class EstudianteDAO {
 
-    //INSERTAR:
+    public void insertarEstudiante(Session session, Estudiante e) {
+		session.persist(e);
+		System.out.println("Estudiante insertado");
+	}
 	
-	public void insertEstudiante(Estudiante es) {
-		org.hibernate.Transaction transaction = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			transaction = session.beginTransaction();
-			session.persist(es);
-			transaction.commit();
-		} catch (Exception e) {
-			if (transaction!=null) {
-				transaction.rollback();
-			}
+	public void actualizarEstudiante(Session session, Estudiante e) {
+		session.merge(e);
+		System.out.println("Estudiante actualizado");
+	}
+	
+	public void deleteEstudiante(Session session, int idestudiante) {
+		Estudiante e = session.get(Estudiante.class, idestudiante);
+		if (e != null ) {
+			session.remove(e);
+			System.out.println("Estudiante eliminado");
 		}
 	}
 
-	//UPDATE:
-	
-	public void updateEstudiante(Estudiante es) {
-		org.hibernate.Transaction transaction = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			transaction = session.beginTransaction();
-			session.merge(es);
-			transaction.commit();
-		} catch (Exception e) {
-			if (transaction!=null) {
-				transaction.rollback();
-			}
-		}
+	public Estudiante selectEstudianteById(Session session, int idestudiante) {
+		return session.get(Estudiante.class, idestudiante);
 	}
 	
-	//BORRADO:
 	
-	public void deleteEstudiante(int idestudiante) {
-		org.hibernate.Transaction transaction = null;
-		Estudiante es = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			transaction = session.beginTransaction();
-			es = session.get(Estudiante.class, idestudiante);
-			session.remove(es);
-			transaction.commit();
-		} catch (Exception e) {
-			if (transaction!=null) {
-				transaction.rollback();
-			}
-		}
-	}
-	
-	//SELECCION SIMPLE:
-	
-	public Estudiante selectEstudianteById(int idestudiante) {
-		org.hibernate.Transaction transaction = null;
-		Estudiante es = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			transaction = session.beginTransaction();
-			es = session.get(Estudiante.class, idestudiante);
-			transaction.commit();
-		} catch (Exception e) {
-			if(transaction!=null) {
-				transaction.rollback();
-			}
-		}
-		return es;
-	}
-	
-	//SELECCION MULTIPLE:
-	
-	public List<Estudiante> selectAllEstudiante() {
-		org.hibernate.Transaction transaction = null;
-		List<Estudiante> estudiantes = null;
-		Estudiante es = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			transaction = session.beginTransaction();
-			estudiantes=session.createQuery("from Estudiante", Estudiante.class).getResultList();
-			transaction.commit();
-		} catch (Exception e) {
-			if(transaction!=null) {
-				transaction.rollback();
-			}
-		}
-		return estudiantes;
+	public List<Estudiante> selectAllEstudiantes(Session session) {
+		return session.createQuery("FROM Estudiante", Estudiante.class).list();
 	}
     
 }

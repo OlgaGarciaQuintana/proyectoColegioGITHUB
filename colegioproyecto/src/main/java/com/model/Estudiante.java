@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Table(name="estudiante")
 public class Estudiante {
     
-    @Id
+	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idestudiante")
 	private int idestudiante;
@@ -55,5 +55,5 @@ public class Estudiante {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-
+    
 }
