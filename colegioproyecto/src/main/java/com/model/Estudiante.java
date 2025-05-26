@@ -8,36 +8,36 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="curso")
-public class Curso {
-	
-	@Id
+@Table(name="estudiante")
+public class Estudiante {
+    
+    @Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="idcurso")
-	private int idcurso;
+	@Column(name="idestudiante")
+	private int idestudiante;
 	
 	@Column(name="nombre")
 	private String nombre;
 	
-	@Column(name="duracion")
-	private int duracion;
+	@Column(name="edad")
+	private int edad;
 	
-	public Curso(String nombre, int duracion) {
+	public Estudiante(String nombre, int edad) {
 		super();
 		this.nombre = nombre;
-		this.duracion = duracion;
+		this.edad = edad;
 	}
 
-	public Curso() {
+	public Estudiante() {
 		super();
 	}
 
-	public int getIdcurso() {
-		return idcurso;
+	public int getIdestudiante() {
+		return idestudiante;
 	}
 
-	public void setIdcurso(int idcurso) {
-		this.idcurso = idcurso;
+	public void setIdestudiante(int idestudiante) {
+		this.idestudiante = idestudiante;
 	}
 
 	public String getNombre() {
@@ -48,12 +48,12 @@ public class Curso {
 		this.nombre = nombre;
 	}
 
-	public int getDuracion() {
-		return duracion;
+	public int getEdad() {
+		return edad;
 	}
 
-	public void setDuracion(int duracion) {
-		this.duracion = duracion;
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
-    
+
 }
