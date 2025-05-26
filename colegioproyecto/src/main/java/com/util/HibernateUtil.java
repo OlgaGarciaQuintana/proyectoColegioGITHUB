@@ -10,7 +10,6 @@ import org.hibernate.cfg.Environment;
 
 import com.model.Curso;
 import com.model.Estudiante;
-import com.model.Matricula;
 
 public class HibernateUtil {
 
@@ -35,7 +34,6 @@ public class HibernateUtil {
 				//Conectarse a las clases de modelo:
 				configuration.addAnnotatedClass(Estudiante.class);
 				configuration.addAnnotatedClass(Curso.class);
-				configuration.addAnnotatedClass(Matricula.class);
 				
 				StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 				
