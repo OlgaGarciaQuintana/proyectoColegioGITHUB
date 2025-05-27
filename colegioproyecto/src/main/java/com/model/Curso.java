@@ -3,20 +3,21 @@ package com.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="curso")
+@Getter
+@Setter
 public class Curso {
 	
 	@Id
@@ -34,6 +35,12 @@ public class Curso {
     private Set<Estudiante> estudiantes = new HashSet<>();
 	
 	public Curso(String nombre, int duracion) {
+		super();
+		this.nombre = nombre;
+		this.duracion = duracion;
+	}
+
+	public Curso(String nombre, int duracion, Estudiante estudiantes) {
 		super();
 		this.nombre = nombre;
 		this.duracion = duracion;
@@ -65,6 +72,16 @@ public class Curso {
 
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
+	}
+
+	public void añadirEstudiante(Estudiante e) {
+		estudiantes.add(e);
+		e.getCursos().add(this);
+	}
+
+	public void quitarEstudiante(Estudiante e) {
+		estudiantes.remove(e);
+		e.getCursos().remove(this);
 	}
     
 }

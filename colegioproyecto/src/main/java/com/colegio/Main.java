@@ -2,6 +2,7 @@ package com.colegio;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -22,21 +23,26 @@ public class Main {
         System.out.println("4. Insertar curso");
         System.out.println("5. Actualizar curso");
         System.out.println("6. Borrar curso");
+        System.out.println("7. Insertar matricula");
+        System.out.println("8. Borrar matricula");
+        System.out.println("9. Mostrar todos los estudiantes");
+        System.out.println("10. Mostrar todos los cursos");
+        System.out.println("11. Mostrar todas las matriculas");
         System.out.println("0. Salir");
     }
     public static void main(String[] args) {
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
+        
+        int opcion = 12;
+        do {
 
-        try {
-
-            int opcion;
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
 
             EstudianteDAO estudianteDAO = new EstudianteDAO();
             CursoDAO cursoDAO = new CursoDAO();
 
-            do {
+            try {
                 Scanner s = new Scanner(System.in);
 				mostrarMenu();
 	            opcion = s.nextInt();
@@ -178,6 +184,84 @@ public class Main {
 
 	            		
 	            	break;
+
+                    case 7:
+
+                    //INSERTAR UNA MATRICULA:
+
+                    System.out.println("Pon el id del alumno");
+                    idE = s.nextInt();
+
+                    System.out.println("Pon el id del curso");
+                    idC = s.nextInt();
+
+                    estudiante = estudianteDAO.selectEstudianteById(session, idE);
+                    curso = cursoDAO.selectCursoById(session, idC);
+
+                    estudiante.añadirCurso(curso);
+
+                    estudianteDAO.insertarEstudiante(session, estudiante);
+
+                    break;
+
+                    case 8:
+
+                    //BORRAR UNA MATRICULA:
+
+                    System.out.println("Pon el id del alumno");
+                    idE = s.nextInt();
+
+                    System.out.println("Pon el id del curso");
+                    idC = s.nextInt();
+
+                    estudiante = estudianteDAO.selectEstudianteById(session, idE);
+                    curso = cursoDAO.selectCursoById(session, idC);
+
+                    estudiante.quitarCurso(curso);
+                    curso.quitarEstudiante(estudiante);
+
+
+                    break;
+
+                    case 9:
+
+                    //MOSTRAR TODOS LOS ESTUDIANTES:
+
+                    estudiantes = estudianteDAO.selectAllEstudiantes(session);
+
+                    for (Estudiante e : estudiantes) {
+                        System.out.println(e.getIdestudiante() + " " + e.getNombre() + " " + e.getEdad()); 
+                    }
+
+                    break;
+
+                    case 10:
+
+                    //MOSTRAR TODOS LOS CURSOS:
+
+                    cursos = cursoDAO.selectAllCursos(session);
+
+                    for (Curso c : cursos) {
+                        System.out.println(c.getIdcurso() + " " + c.getNombre() + " " + c.getDuracion()); 
+                    }
+
+                    break;
+
+                    case 11:
+
+                    //MOSTRAR TODAS LAS MATRICULAS:
+
+                    estudiantes = estudianteDAO.selectAllEstudiantes(session);
+
+                    for (Estudiante e : estudiantes) {
+                        Set<Curso> cursosEstudiante = e.getCursos();
+                        for (Curso c : cursosEstudiante) {
+                            System.out.println("Estudiante ID: " + e.getIdestudiante() + " - Curso ID: " + c.getIdcurso());
+                        }
+                    }
+
+
+                    
 	            	
 	            	case 0:
 		                    System.out.println("Fin del programa");
@@ -187,18 +271,19 @@ public class Main {
 		                    System.out.println("Opción no válida");
 	            		
 	            }
-				
-			}while (opcion != 0);
-
-
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
+				transaction.commit();
+                session.clear();
+			}catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.printStackTrace();
+            } finally {
+                session.close();
             }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+            
+
+        } while (opcion != 0);
 
     }
 }

@@ -14,10 +14,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="estudiante")
+@Getter
+@Setter
 public class Estudiante {
+
+	
     
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -70,6 +76,12 @@ public class Estudiante {
 
 	public void añadirCurso(Curso c) {
 		cursos.add(c);
+		c.getEstudiantes().add(this);
+	}
+
+	public void quitarCurso(Curso c) {
+		cursos.remove(c);
+		c.getEstudiantes().remove(this);
 	}
     
 }
