@@ -29,7 +29,7 @@ CREATE TABLE `curso` (
   `nombre` varchar(255) DEFAULT NULL,
   `duracion` int NOT NULL,
   PRIMARY KEY (`idcurso`)
-) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=303 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `curso` (
 
 LOCK TABLES `curso` WRITE;
 /*!40000 ALTER TABLE `curso` DISABLE KEYS */;
-INSERT INTO `curso` VALUES (152,'ASIW',123),(252,'DAM',345);
+INSERT INTO `curso` VALUES (152,'ASIW',123),(302,'DAW',456);
 /*!40000 ALTER TABLE `curso` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `curso_SEQ` (
 
 LOCK TABLES `curso_SEQ` WRITE;
 /*!40000 ALTER TABLE `curso_SEQ` DISABLE KEYS */;
-INSERT INTO `curso_SEQ` VALUES (351);
+INSERT INTO `curso_SEQ` VALUES (401);
 /*!40000 ALTER TABLE `curso_SEQ` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +76,7 @@ CREATE TABLE `estudiante` (
   `nombre` varchar(255) NOT NULL,
   `edad` int NOT NULL,
   PRIMARY KEY (`idestudiante`)
-) ENGINE=InnoDB AUTO_INCREMENT=403 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=454 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `estudiante` (
 
 LOCK TABLES `estudiante` WRITE;
 /*!40000 ALTER TABLE `estudiante` DISABLE KEYS */;
-INSERT INTO `estudiante` VALUES (1,'Olga',19),(252,'Lolo',34),(302,'Pepa',23),(352,'Alvaro',99),(402,'Pedro',67);
+INSERT INTO `estudiante` VALUES (1,'Olga',19),(302,'Pepa',23),(402,'Pedro',67),(452,'Carlota',56);
 /*!40000 ALTER TABLE `estudiante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +107,7 @@ CREATE TABLE `estudiante_SEQ` (
 
 LOCK TABLES `estudiante_SEQ` WRITE;
 /*!40000 ALTER TABLE `estudiante_SEQ` DISABLE KEYS */;
-INSERT INTO `estudiante_SEQ` VALUES (501);
+INSERT INTO `estudiante_SEQ` VALUES (551);
 /*!40000 ALTER TABLE `estudiante_SEQ` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,8 +123,8 @@ CREATE TABLE `matriculacion` (
   `idcurso` int NOT NULL,
   PRIMARY KEY (`idestudiante`,`idcurso`),
   KEY `FK4i3leewdxb433kbjjdop7mb5y` (`idcurso`),
-  CONSTRAINT `FK4i3leewdxb433kbjjdop7mb5y` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`),
-  CONSTRAINT `FKqiwak5rcf3omhw9sifg7c1gkn` FOREIGN KEY (`idestudiante`) REFERENCES `estudiante` (`idestudiante`)
+  CONSTRAINT `FK4i3leewdxb433kbjjdop7mb5y` FOREIGN KEY (`idcurso`) REFERENCES `curso` (`idcurso`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FKqiwak5rcf3omhw9sifg7c1gkn` FOREIGN KEY (`idestudiante`) REFERENCES `estudiante` (`idestudiante`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -134,7 +134,7 @@ CREATE TABLE `matriculacion` (
 
 LOCK TABLES `matriculacion` WRITE;
 /*!40000 ALTER TABLE `matriculacion` DISABLE KEYS */;
-INSERT INTO `matriculacion` VALUES (252,152),(352,152),(1,252);
+INSERT INTO `matriculacion` VALUES (1,302);
 /*!40000 ALTER TABLE `matriculacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-27 12:06:32
+-- Dump completed on 2025-05-28 12:56:40
