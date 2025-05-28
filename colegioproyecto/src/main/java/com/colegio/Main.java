@@ -200,7 +200,7 @@ public class Main {
 
                     estudiante.añadirCurso(curso);
 
-                    estudianteDAO.insertarEstudiante(session, estudiante);
+                    estudianteDAO.actualizarEstudiante(session, estudiante);
 
                     break;
 
@@ -218,7 +218,7 @@ public class Main {
                     curso = cursoDAO.selectCursoById(session, idC);
 
                     estudiante.quitarCurso(curso);
-                    curso.quitarEstudiante(estudiante);
+                    estudianteDAO.actualizarEstudiante(session, estudiante);
 
 
                     break;
