@@ -1,6 +1,8 @@
+package com.GUIBuilder;
+
 import javax.swing.*;
 import java.awt.Color;
-import helper_classes.*;
+import com.GUIBuilder.helper_classes.*;
 
 public class WindowBuilder {
   public static void main(String[] args) {
@@ -93,29 +95,29 @@ public class WindowBuilder {
      el4.setForeground(Color.decode("#000"));
      panel.add(el4);
 
-     JLabel el4 = new JLabel("Id Curso:");
-     el4.setBounds(302, 239, 106, 18);
-     el4.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     el4.setForeground(Color.decode("#000"));
-     panel.add(el4);
+     JLabel el5 = new JLabel("Id Curso:");
+     el5.setBounds(302, 239, 106, 18);
+     el5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     el5.setForeground(Color.decode("#000"));
+     panel.add(el5);
 
-     JTextField idEstudiante = new JTextField("");
-     idEstudiante.setBounds(416, 209, 134, 24);
-     idEstudiante.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     idEstudiante.setBackground(Color.decode("#ffe7bf"));
-     idEstudiante.setForeground(Color.decode("#73664e"));
-     idEstudiante.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-     OnFocusEventHelper.setOnFocusText(idEstudiante, "idEstudiante", Color.decode("#000"),   Color.decode("#73664e"));
-     panel.add(idEstudiante);
+     JTextField idEstudianteM = new JTextField("");
+     idEstudianteM.setBounds(416, 209, 134, 24);
+     idEstudianteM.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     idEstudianteM.setBackground(Color.decode("#ffe7bf"));
+     idEstudianteM.setForeground(Color.decode("#73664e"));
+     idEstudianteM.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
+     OnFocusEventHelper.setOnFocusText(idEstudianteM, "idEstudiante", Color.decode("#000"),   Color.decode("#73664e"));
+     panel.add(idEstudianteM);
 
-     JTextField idCurso = new JTextField("");
-     idCurso.setBounds(418, 239, 134, 24);
-     idCurso.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     idCurso.setBackground(Color.decode("#ffe7bf"));
-     idCurso.setForeground(Color.decode("#73664e"));
-     idCurso.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-     OnFocusEventHelper.setOnFocusText(idCurso, "idCurso", Color.decode("#000"),   Color.decode("#73664e"));
-     panel.add(idCurso);
+     JTextField idCursoM = new JTextField("");
+     idCursoM.setBounds(418, 239, 134, 24);
+     idCursoM.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     idCursoM.setBackground(Color.decode("#ffe7bf"));
+     idCursoM.setForeground(Color.decode("#73664e"));
+     idCursoM.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
+     OnFocusEventHelper.setOnFocusText(idCursoM, "idCurso", Color.decode("#000"),   Color.decode("#73664e"));
+     panel.add(idCursoM);
 
      JButton insertarMatricula = new JButton("Insertar");
      insertarMatricula.setBounds(376, 311, 106, 30);
@@ -137,23 +139,23 @@ public class WindowBuilder {
      OnClickEventHelper.setOnClickColor(borrarMatricula, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(borrarMatricula);
 
-     JLabel el5 = new JLabel("Id:");
-     el5.setBounds(618, 208, 106, 18);
-     el5.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     el5.setForeground(Color.decode("#000"));
-     panel.add(el5);
-
-     JLabel el6 = new JLabel("Nombre:");
-     el6.setBounds(618, 235, 106, 18);
+     JLabel el6 = new JLabel("Id:");
+     el6.setBounds(618, 208, 106, 18);
      el6.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      el6.setForeground(Color.decode("#000"));
      panel.add(el6);
 
-     JLabel el7 = new JLabel("Duracion:");
-     el7.setBounds(616, 266, 106, 18);
+     JLabel el7 = new JLabel("Nombre:");
+     el7.setBounds(618, 235, 106, 18);
      el7.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      el7.setForeground(Color.decode("#000"));
      panel.add(el7);
+
+     JLabel el8 = new JLabel("Duracion:");
+     el8.setBounds(616, 266, 106, 18);
+     el8.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
+     el8.setForeground(Color.decode("#000"));
+     panel.add(el8);
 
      JTextField idCurso = new JTextField("");
      idCurso.setBounds(687, 206, 134, 24);
