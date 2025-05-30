@@ -1,11 +1,29 @@
 package com.GUIBuilder;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 import java.awt.Color;
+import java.awt.event.*;
+import org.hibernate.Session;
+
 import com.GUIBuilder.helper_classes.*;
+import com.dao.CursoDAO;
+import com.dao.EstudianteDAO;
+import com.model.Estudiante;
+import com.model.Curso;
+import com.util.HibernateUtil;
 
 public class WindowBuilder {
   public static void main(String[] args) {
+
+    Session session = HibernateUtil.getSessionFactory().openSession();
+
+     EstudianteDAO estudianteDAO = new EstudianteDAO();
+     CursoDAO cursoDAO = new CursoDAO();
 
      JFrame frame = new JFrame("My Awesome Window");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -214,32 +232,145 @@ public class WindowBuilder {
      OnClickEventHelper.setOnClickColor(borrarCurso, Color.decode("#7c6f97"), Color.decode("#bca8e4"));
      panel.add(borrarCurso);
 
-     JTextArea mostrarEstudiantes = new JTextArea("");
-     mostrarEstudiantes.setBounds(35, 27, 232, 164);
-     mostrarEstudiantes.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     mostrarEstudiantes.setBackground(Color.decode("#ffe7bf"));
-     mostrarEstudiantes.setForeground(Color.decode("#73664e"));
-     mostrarEstudiantes.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-     OnFocusEventHelper.setOnFocusText(mostrarEstudiantes, "", Color.decode("#000"),   Color.decode("#73664e"));
-     panel.add(mostrarEstudiantes);
+    //TABLA ESTUDIANTE:
 
-     JTextArea mostrarMatriculas = new JTextArea("");
-     mostrarMatriculas.setBounds(314, 27, 232, 164);
-     mostrarMatriculas.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     mostrarMatriculas.setBackground(Color.decode("#ffe7bf"));
-     mostrarMatriculas.setForeground(Color.decode("#73664e"));
-     mostrarMatriculas.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-     OnFocusEventHelper.setOnFocusText(mostrarMatriculas, "", Color.decode("#000"),   Color.decode("#73664e"));
-     panel.add(mostrarMatriculas);
+     // Crear el modelo de la tabla
+DefaultTableModel modelE = new DefaultTableModel();
+modelE.addColumn("ID");
+modelE.addColumn("Nombre");
+modelE.addColumn("Edad");
 
-     JTextArea mostrarCursos = new JTextArea("");
-     mostrarCursos.setBounds(602, 26, 232, 164);
-     mostrarCursos.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     mostrarCursos.setBackground(Color.decode("#ffe7bf"));
-     mostrarCursos.setForeground(Color.decode("#73664e"));
-     mostrarCursos.setBorder(new RoundedBorder(2, Color.decode("#000"), 1));
-     OnFocusEventHelper.setOnFocusText(mostrarCursos, "", Color.decode("#000"),   Color.decode("#73664e"));
-     panel.add(mostrarCursos);
+// Crear la tabla con el modelo
+JTable tableE = new JTable(modelE);
+
+// Añadir un listener para cuando se haga clic en una fila
+tableE.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int indexE = tableE.getSelectedRow();
+        TableModel modelE = tableE.getModel();
+
+        // Usamos directamente el modelo ya declarado arriba
+        idEstudiante.setText(modelE.getValueAt(indexE, 0).toString());
+        nombreEstudiante.setText(modelE.getValueAt(indexE, 1).toString());
+        edadEstudiante.setText(modelE.getValueAt(indexE, 2).toString());
+
+        // También rellenamos el campo de matrícula
+        idEstudianteM.setText(modelE.getValueAt(indexE, 0).toString());
+
+       
+
+    }
+});
+
+// Ajuste automático del tamaño de columnas
+tableE.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+// Añadir la tabla a un JScrollPane
+JScrollPane scrollPaneE = new JScrollPane(tableE);
+scrollPaneE.setBounds(35, 27, 232, 164);
+
+// Añadir el JScrollPane al frame
+frame.getContentPane().add(scrollPaneE);
+
+List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
+
+for(Estudiante es:estudiantes){
+  Object[]filaE={es.getIdestudiante(), es.getNombre(), es.getEdad()};
+  modelE.addRow(filaE);
+}
+
+//TABLA CURSO:
+
+// Crear el modelo de la tabla
+DefaultTableModel modelC = new DefaultTableModel();
+modelC.addColumn("ID");
+modelC.addColumn("Nombre");
+modelC.addColumn("Duracion");
+
+// Crear la tabla con el modelo
+JTable tableC = new JTable(modelC);
+
+// Añadir un listener para cuando se haga clic en una fila
+tableC.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int indexC = tableC.getSelectedRow();
+
+        // Usamos directamente el modelo ya declarado arriba
+        idCurso.setText(modelC.getValueAt(indexC, 0).toString());
+        nombreCurso.setText(modelC.getValueAt(indexC, 1).toString());
+        duracionCurso.setText(modelC.getValueAt(indexC, 2).toString());
+
+        // También rellenamos el campo de matrícula
+        idCursoM.setText(modelC.getValueAt(indexC, 0).toString());
+    }
+});
+
+// Ajuste automático del tamaño de columnas
+tableC.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+// Añadir la tabla a un JScrollPane
+JScrollPane scrollPaneC = new JScrollPane(tableC);
+scrollPaneC.setBounds(602, 26, 232, 164);
+
+// Añadir el JScrollPane al frame
+frame.getContentPane().add(scrollPaneC);
+
+List<Curso> cursos = cursoDAO.selectAllCursos(session);
+
+for(Curso cu:cursos){
+  Object[]filaC={cu.getIdcurso(), cu.getNombre(), cu.getDuracion()};
+  modelC.addRow(filaC);
+}
+
+      //TABLA MATRICULA:
+
+      // Crear el modelo de la tabla
+DefaultTableModel modelM = new DefaultTableModel();
+modelM.addColumn("ID Estudiante");
+modelM.addColumn("ID Curso");
+
+// Crear la tabla con el modelo
+JTable tableM = new JTable(modelM);
+
+// Añadir un listener para cuando se haga clic en una fila
+tableM.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int indexM = tableM.getSelectedRow();
+
+        // Usamos directamente el modelo ya declarado arriba
+        idEstudianteM.setText(modelM.getValueAt(indexM, 0).toString());
+        idCursoM.setText(modelM.getValueAt(indexM, 1).toString());
+
+    }
+});
+
+// Ajuste automático del tamaño de columnas
+tableM.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+// Añadir la tabla a un JScrollPane
+JScrollPane scrollPaneM = new JScrollPane(tableM);
+scrollPaneM.setBounds(314, 27, 232, 164);
+
+// Añadir el JScrollPane al frame
+frame.getContentPane().add(scrollPaneM);
+
+estudiantes = estudianteDAO.selectAllEstudiantes(session);
+cursos = cursoDAO.selectAllCursos(session);
+
+for(Estudiante es:estudiantes){
+  for(Curso cu:cursos){
+    Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
+    modelM.addRow(filaM);
+  }
+}
+
+    idEstudiante.setEditable(false);
+    idEstudianteM.setEditable(false);
+    idCurso.setEditable(false);
+    idCursoM.setEditable(false);
 
      frame.add(panel);
      frame.setVisible(true);
