@@ -367,6 +367,7 @@ for(Estudiante es:estudiantes){
   }
 }
 
+
     idEstudiante.setEditable(false);
     idEstudianteM.setEditable(false);
     idCurso.setEditable(false);
