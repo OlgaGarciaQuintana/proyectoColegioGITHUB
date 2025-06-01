@@ -25,7 +25,8 @@ public class OnClickEventHelper {
 
     public static void setOnClickColor(JButton button, Color pressedColor, Color originalColor, 
                                         DefaultTableModel modelE, JTextField idEstudiante, JTextField nombreEstudiante, JTextField edadEstudiante,
-                                        DefaultTableModel modelC, JTextField idCurso, JTextField nombreCurso, JTextField duracionCurso,  Session session) {
+                                        DefaultTableModel modelC, JTextField idCurso, JTextField nombreCurso, JTextField duracionCurso,  
+                                        DefaultTableModel modelM, JTextField idEstudianteM, JTextField idCursoM, Session session) {
     button.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -190,12 +191,58 @@ public class OnClickEventHelper {
                             modelC.addRow(filaC);
                         }
 
-                    } else if (button.getText().equals("insertarMatricula")) {
+                    } else if (button.getText().equals("Insertar M")) {
+
+                        String idEMTexto = idEstudianteM.getText();
+                        int idEM = Integer.parseInt(idEMTexto);
+
+                        String idCMTexto = idCursoM.getText();
+                        int idCM = Integer.parseInt(idCMTexto);
+
+                        Estudiante estudianteElegido = estudianteDAO.selectEstudianteById(session, idEM);
+                        Curso cursoElegido = cursoDAO.selectCursoById(session, idCM);
+
+                        estudianteElegido.añadirCurso(cursoElegido);
+
+                        idEstudianteM.setText("");
+                        idCursoM.setText("");
+
+                        modelM.setRowCount(0);
+
+                        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
+
+                        for(Estudiante es: estudiantes){
+                            for(Curso cu: es.getCursos()){
+                                 Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
+                                 modelM.addRow(filaM);
+                            }
+                        }
 
 
 
-                    } else if (button.getText().equals("borrarMatricula")) {
+                    } else if (button.getText().equals("Borrar M")) {
 
+                        String idEMTexto = idEstudianteM.getText();
+                        int idEM = Integer.parseInt(idEMTexto);
+
+                        String idCMTexto = idCursoM.getText();
+                        int idCM = Integer.parseInt(idCMTexto);
+
+                        Estudiante estudianteElegido = estudianteDAO.selectEstudianteById(session, idEM);
+                        Curso cursoElegido = cursoDAO.selectCursoById(session, idCM);
+
+                        estudianteElegido.quitarCurso(cursoElegido);
+
+                        modelM.setRowCount(0);
+
+                        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
+
+                        for(Estudiante es: estudiantes){
+                            for(Curso cu: es.getCursos()){
+                                 Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
+                                 modelM.addRow(filaM);
+                            }
+                        }
 
 
                     }

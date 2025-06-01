@@ -278,14 +278,14 @@ scrollPaneM.setBounds(314, 27, 232, 164);
 frame.getContentPane().add(scrollPaneM);
 
 estudiantes = estudianteDAO.selectAllEstudiantes(session);
-cursos = cursoDAO.selectAllCursos(session);
 
-for(Estudiante es:estudiantes){
-  for(Curso cu:cursos){
-    Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
-    modelM.addRow(filaM);
-  }
-}
+    for(Estudiante es: estudiantes){
+      for(Curso cu: es.getCursos()){
+        Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
+        modelM.addRow(filaM);
+      }
+    }
+
 
     //BOTONES:
 
@@ -296,7 +296,7 @@ for(Estudiante es:estudiantes){
      insertarEstudiante.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      insertarEstudiante.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      insertarEstudiante.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(insertarEstudiante, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, session);
+     OnClickEventHelper.setOnClickColor(insertarEstudiante, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, modelM, idEstudianteM, idCursoM, session);
      panel.add(insertarEstudiante);
 
      JButton actualizarEstudiante = new JButton("Actualizar E");
@@ -306,7 +306,7 @@ for(Estudiante es:estudiantes){
      actualizarEstudiante.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      actualizarEstudiante.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      actualizarEstudiante.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(actualizarEstudiante, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, session);
+     OnClickEventHelper.setOnClickColor(actualizarEstudiante, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, modelM, idEstudianteM, idCursoM, session);
      panel.add(actualizarEstudiante);
 
      JButton borrarEstudiante = new JButton("Borrar E");
@@ -316,7 +316,7 @@ for(Estudiante es:estudiantes){
      borrarEstudiante.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      borrarEstudiante.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      borrarEstudiante.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(borrarEstudiante, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, session);
+     OnClickEventHelper.setOnClickColor(borrarEstudiante, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, modelM, idEstudianteM, idCursoM, session);
      panel.add(borrarEstudiante);
 
      JButton insertarMatricula = new JButton("Insertar M");
@@ -326,7 +326,7 @@ for(Estudiante es:estudiantes){
      insertarMatricula.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      insertarMatricula.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      insertarMatricula.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(insertarMatricula, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, session);
+     OnClickEventHelper.setOnClickColor(insertarMatricula, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, modelM, idEstudianteM, idCursoM, session);
      panel.add(insertarMatricula);
 
      JButton borrarMatricula = new JButton("Borrar M");
@@ -336,7 +336,7 @@ for(Estudiante es:estudiantes){
      borrarMatricula.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      borrarMatricula.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      borrarMatricula.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(borrarMatricula, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, session);
+     OnClickEventHelper.setOnClickColor(borrarMatricula, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, modelM, idEstudianteM, idCursoM, session);
      panel.add(borrarMatricula);
 
      JButton insertarCurso = new JButton("Insertar C");
@@ -346,7 +346,7 @@ for(Estudiante es:estudiantes){
      insertarCurso.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      insertarCurso.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      insertarCurso.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(insertarCurso, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, session);
+     OnClickEventHelper.setOnClickColor(insertarCurso, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, modelM, idEstudianteM, idCursoM, session);
      panel.add(insertarCurso);
 
      JButton actualizarCurso = new JButton("Actualizar C");
@@ -356,7 +356,7 @@ for(Estudiante es:estudiantes){
      actualizarCurso.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      actualizarCurso.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      actualizarCurso.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(actualizarCurso, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, session);
+     OnClickEventHelper.setOnClickColor(actualizarCurso, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, modelM, idEstudianteM, idCursoM, session);
      panel.add(actualizarCurso);
 
      JButton borrarCurso = new JButton("Borrar C");
@@ -366,7 +366,7 @@ for(Estudiante es:estudiantes){
      borrarCurso.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
      borrarCurso.setBorder(new RoundedBorder(4, Color.decode("#3d364a"), 1));
      borrarCurso.setFocusPainted(false);
-     OnClickEventHelper.setOnClickColor(borrarCurso, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, session);
+     OnClickEventHelper.setOnClickColor(borrarCurso, Color.decode("#7c6f97"), Color.decode("#bca8e4"), modelE, idEstudiante, nombreEstudiante, edadEstudiante, modelC, idCurso, nombreCurso, duracionCurso, modelM, idEstudianteM, idCursoM, session);
      panel.add(borrarCurso);
 
     
