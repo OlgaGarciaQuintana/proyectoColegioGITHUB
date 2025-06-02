@@ -22,9 +22,9 @@ public class HibernateUtil {
 				//Conectarse a la base de datos:
 				Properties settings = new Properties();
 				settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-				settings.put(Environment.URL, "jdbc:mysql://127.0.0.1:3306/colegiovsc?useSSL=false");
-				settings.put(Environment.USER, "root");
-				settings.put(Environment.PASS, "1234-Abcd");
+				settings.put(Environment.URL, "jdbc:mysql://127.0.0.1:3307/colegioVSC?useSSL=false");
+				settings.put(Environment.USER, "alumno");
+				settings.put(Environment.PASS, "alumno");
 				settings.put(Environment.SHOW_SQL, "false");
 				settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
 				settings.put(Environment.HBM2DDL_AUTO, "update");
