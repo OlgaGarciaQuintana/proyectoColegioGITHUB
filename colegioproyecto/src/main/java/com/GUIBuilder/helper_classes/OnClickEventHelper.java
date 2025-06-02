@@ -120,6 +120,15 @@ public class OnClickEventHelper {
                             modelE.addRow(filaE);
                          }
 
+                         modelM.setRowCount(0);
+
+                         for(Estudiante es: estudiantes){
+                            for(Curso cu: es.getCursos()){
+                                 Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
+                                 modelM.addRow(filaM);
+                            }
+                        }
+
                     }  else if (button.getText().equals("Insertar C")) {
 
                          String nombre = nombreCurso.getText();
@@ -189,6 +198,19 @@ public class OnClickEventHelper {
                         for (Curso cu:cursos){
                             Object[]filaC={cu.getIdcurso(), cu.getNombre(), cu.getDuracion()};
                             modelC.addRow(filaC);
+                        }
+
+                        session.clear();
+
+                        modelM.setRowCount(0);
+
+                        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
+
+                        for(Estudiante es: estudiantes){
+                            for(Curso cu: es.getCursos()){
+                                 Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
+                                 modelM.addRow(filaM);
+                            }
                         }
 
                     } else if (button.getText().equals("Insertar M")) {
