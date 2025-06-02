@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -99,7 +100,6 @@ public class OnClickEventHelper {
                         edadEstudiante.setText("");
 
                         recargarTablaEstudiantes(modelE, session, estudianteDAO);
-
 
                     //ACTUALIZAR ESTUDIANTE:
                     } else if (button.getText().equals("Actualizar E")) {
