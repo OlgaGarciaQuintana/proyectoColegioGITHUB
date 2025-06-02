@@ -204,6 +204,8 @@ public class OnClickEventHelper {
 
                         estudianteElegido.añadirCurso(cursoElegido);
 
+                        transaction.commit();
+
                         idEstudianteM.setText("");
                         idCursoM.setText("");
 
@@ -232,6 +234,8 @@ public class OnClickEventHelper {
                         Curso cursoElegido = cursoDAO.selectCursoById(session, idCM);
 
                         estudianteElegido.quitarCurso(cursoElegido);
+
+                        transaction.commit();
 
                         modelM.setRowCount(0);
 
