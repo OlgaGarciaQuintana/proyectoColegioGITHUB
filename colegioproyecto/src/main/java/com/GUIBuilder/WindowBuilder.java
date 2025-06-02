@@ -376,6 +376,8 @@ estudiantes = estudianteDAO.selectAllEstudiantes(session);
     idEstudianteM.setEditable(false);
     idCurso.setEditable(false);
     idCursoM.setEditable(false);
+    idEstudianteM.setEditable(false);
+    idCursoM.setEditable(false);
 
      frame.add(panel);
      frame.setVisible(true);
