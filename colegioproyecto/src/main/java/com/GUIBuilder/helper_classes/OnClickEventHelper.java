@@ -23,6 +23,41 @@ import com.GUIBuilder.resources.*;
 
 public class OnClickEventHelper {
 
+    //FUNCION RECARGAR TABLA ESTUDIANTE:
+
+    public static void recargarTablaEstudiantes(DefaultTableModel modelE, Session session, EstudianteDAO estudianteDAO) {
+        modelE.setRowCount(0);
+        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
+        for (Estudiante es : estudiantes) {
+            Object[] filaE = {es.getIdestudiante(), es.getNombre(), es.getEdad()};
+            modelE.addRow(filaE);
+        }
+    }
+
+    //FUNCION RECARGAR TABLA CURSO:
+
+    public static void recargarTablaCursos(DefaultTableModel modelC, Session session, CursoDAO cursoDAO) {
+        modelC.setRowCount(0);
+        List<Curso> cursos = cursoDAO.selectAllCursos(session);
+        for (Curso cu : cursos) {
+            Object[] filaC = {cu.getIdcurso(), cu.getNombre(), cu.getDuracion()};
+            modelC.addRow(filaC);
+        }
+    }
+
+    //FUNCION RECARGAR TABLA MATRICULA:
+
+    public static void recargarTablaMatriculas(DefaultTableModel modelM, Session session, EstudianteDAO estudianteDAO) {
+        modelM.setRowCount(0);
+        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
+        for (Estudiante es : estudiantes) {
+            for (Curso cu : es.getCursos()) {
+                Object[] filaM = {es.getIdestudiante(), cu.getIdcurso()};
+                modelM.addRow(filaM);
+            }
+        }
+    }
+
     public static void setOnClickColor(JButton button, Color pressedColor, Color originalColor, 
                                         DefaultTableModel modelE, JTextField idEstudiante, JTextField nombreEstudiante, JTextField edadEstudiante,
                                         DefaultTableModel modelC, JTextField idCurso, JTextField nombreCurso, JTextField duracionCurso,  
@@ -36,6 +71,8 @@ public class OnClickEventHelper {
                 button.setOpaque(true);
                 button.repaint();
                 
+                
+
                 Estudiante estudiante = new Estudiante();
                 Curso curso = new Curso();
 
@@ -46,9 +83,7 @@ public class OnClickEventHelper {
                 Transaction transaction = session.beginTransaction();
 
                 try {
-                    Scanner s = new Scanner(System.in);
-                    String action = button.getActionCommand();
-                   
+
                     if (button.getText().equals("Insertar E")) {
 
                         String nombre = nombreEstudiante.getText();
@@ -61,14 +96,7 @@ public class OnClickEventHelper {
                         nombreEstudiante.setText("");
                         edadEstudiante.setText("");
 
-                        modelE.setRowCount(0);
-
-                        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
-
-                       for(Estudiante es:estudiantes){
-                            Object[]filaE={es.getIdestudiante(), es.getNombre(), es.getEdad()};
-                             modelE.addRow(filaE);
-                        }
+                        recargarTablaEstudiantes(modelE, session, estudianteDAO);
 
 
                     } else if (button.getText().equals("Actualizar E")) {
@@ -90,14 +118,7 @@ public class OnClickEventHelper {
                         nombreEstudiante.setText("");
                         edadEstudiante.setText("");
 
-                        modelE.setRowCount(0);
-
-                        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
-
-                       for(Estudiante es:estudiantes){
-                            Object[]filaE={es.getIdestudiante(), es.getNombre(), es.getEdad()};
-                             modelE.addRow(filaE);
-                        }
+                        recargarTablaEstudiantes(modelE, session, estudianteDAO);
 
 
                     } else if (button.getText().equals("Borrar E")) {
@@ -111,23 +132,9 @@ public class OnClickEventHelper {
                          nombreEstudiante.setText("");
                          edadEstudiante.setText("");
 
-                         modelE.setRowCount(0);
+                         recargarTablaEstudiantes(modelE, session, estudianteDAO);
 
-                         List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
-
-                         for(Estudiante es:estudiantes){
-                            Object[]filaE={es.getIdestudiante(), es.getNombre(), es.getEdad()};
-                            modelE.addRow(filaE);
-                         }
-
-                         modelM.setRowCount(0);
-
-                         for(Estudiante es: estudiantes){
-                            for(Curso cu: es.getCursos()){
-                                 Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
-                                 modelM.addRow(filaM);
-                            }
-                        }
+                         recargarTablaMatriculas(modelM, session, estudianteDAO);
 
                     }  else if (button.getText().equals("Insertar C")) {
 
@@ -141,14 +148,7 @@ public class OnClickEventHelper {
                          nombreCurso.setText("");
                          duracionCurso.setText("");
 
-                         modelC.setRowCount(0);
-
-                         List<Curso> cursos = cursoDAO.selectAllCursos(session);
-
-                         for (Curso cu:cursos){
-                            Object[]filaC={cu.getIdcurso(), cu.getNombre(), cu.getDuracion()};
-                            modelC.addRow(filaC);
-                         }
+                         recargarTablaCursos(modelC, session, cursoDAO);
 
                     } else if (button.getText().equals("Actualizar C")) {
 
@@ -169,14 +169,7 @@ public class OnClickEventHelper {
                         nombreCurso.setText("");
                         duracionCurso.setText("");
 
-                        modelC.setRowCount(0);
-
-                        List<Curso> cursos = cursoDAO.selectAllCursos(session);
-
-                        for (Curso cu:cursos){
-                            Object[]filaC={cu.getIdcurso(), cu.getNombre(), cu.getDuracion()};
-                            modelC.addRow(filaC);
-                        }
+                        recargarTablaCursos(modelC, session, cursoDAO);
 
 
 
@@ -191,27 +184,11 @@ public class OnClickEventHelper {
                         nombreCurso.setText("");
                         duracionCurso.setText("");
 
-                        modelC.setRowCount(0);
-
-                        List<Curso> cursos = cursoDAO.selectAllCursos(session);
-
-                        for (Curso cu:cursos){
-                            Object[]filaC={cu.getIdcurso(), cu.getNombre(), cu.getDuracion()};
-                            modelC.addRow(filaC);
-                        }
+                        recargarTablaCursos(modelC, session, cursoDAO);
 
                         session.clear();
 
-                        modelM.setRowCount(0);
-
-                        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
-
-                        for(Estudiante es: estudiantes){
-                            for(Curso cu: es.getCursos()){
-                                 Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
-                                 modelM.addRow(filaM);
-                            }
-                        }
+                        recargarTablaMatriculas(modelM, session, estudianteDAO);
 
                     } else if (button.getText().equals("Insertar M")) {
 
@@ -231,16 +208,7 @@ public class OnClickEventHelper {
                         idEstudianteM.setText("");
                         idCursoM.setText("");
 
-                        modelM.setRowCount(0);
-
-                        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
-
-                        for(Estudiante es: estudiantes){
-                            for(Curso cu: es.getCursos()){
-                                 Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
-                                 modelM.addRow(filaM);
-                            }
-                        }
+                        recargarTablaMatriculas(modelM, session, estudianteDAO);
 
 
 
@@ -259,16 +227,7 @@ public class OnClickEventHelper {
 
                         transaction.commit();
 
-                        modelM.setRowCount(0);
-
-                        List<Estudiante> estudiantes = estudianteDAO.selectAllEstudiantes(session);
-
-                        for(Estudiante es: estudiantes){
-                            for(Curso cu: es.getCursos()){
-                                 Object[]filaM={es.getIdestudiante(), cu.getIdcurso()};
-                                 modelM.addRow(filaM);
-                            }
-                        }
+                        recargarTablaMatriculas(modelM, session, estudianteDAO);
 
 
                     }
