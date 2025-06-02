@@ -70,20 +70,22 @@ public class OnClickEventHelper {
                 button.setBackground(pressedColor);
                 button.setOpaque(true);
                 button.repaint();
-                
-                
 
+                //Conectar con el model:
                 Estudiante estudiante = new Estudiante();
                 Curso curso = new Curso();
 
+                //Conectar con el dao:
                 EstudianteDAO estudianteDAO = new EstudianteDAO();
                 CursoDAO cursoDAO = new CursoDAO();
 
+                //Conectar con la base de datos:
                 Session session = HibernateUtil.getSessionFactory().openSession();
                 Transaction transaction = session.beginTransaction();
 
                 try {
 
+                    //INSERTAR ESTUDIANTE:
                     if (button.getText().equals("Insertar E")) {
 
                         String nombre = nombreEstudiante.getText();
@@ -99,6 +101,7 @@ public class OnClickEventHelper {
                         recargarTablaEstudiantes(modelE, session, estudianteDAO);
 
 
+                    //ACTUALIZAR ESTUDIANTE:
                     } else if (button.getText().equals("Actualizar E")) {
 
                         String idTexto = idEstudiante.getText();
@@ -121,6 +124,7 @@ public class OnClickEventHelper {
                         recargarTablaEstudiantes(modelE, session, estudianteDAO);
 
 
+                    //BORRAR ESTUDIANTE:
                     } else if (button.getText().equals("Borrar E")) {
 
                          String idTexto = idEstudiante.getText();
@@ -136,6 +140,7 @@ public class OnClickEventHelper {
 
                          recargarTablaMatriculas(modelM, session, estudianteDAO);
 
+                    //INSERTAR CURSO:
                     }  else if (button.getText().equals("Insertar C")) {
 
                          String nombre = nombreCurso.getText();
@@ -150,6 +155,7 @@ public class OnClickEventHelper {
 
                          recargarTablaCursos(modelC, session, cursoDAO);
 
+                    //ACTUALIZAR CURSO:
                     } else if (button.getText().equals("Actualizar C")) {
 
                         String idTexto = idCurso.getText();
@@ -171,8 +177,7 @@ public class OnClickEventHelper {
 
                         recargarTablaCursos(modelC, session, cursoDAO);
 
-
-
+                    //BORRAR CURSO:
                     } else if (button.getText().equals("Borrar C")) {
 
                         String idTexto = idCurso.getText();
@@ -190,6 +195,7 @@ public class OnClickEventHelper {
 
                         recargarTablaMatriculas(modelM, session, estudianteDAO);
 
+                    //INSERTAR MATRICULA:
                     } else if (button.getText().equals("Insertar M")) {
 
                         String idEMTexto = idEstudianteM.getText();
@@ -210,8 +216,7 @@ public class OnClickEventHelper {
 
                         recargarTablaMatriculas(modelM, session, estudianteDAO);
 
-
-
+                    //BORRAR MATRICULA:
                     } else if (button.getText().equals("Borrar M")) {
 
                         String idEMTexto = idEstudianteM.getText();
@@ -229,7 +234,6 @@ public class OnClickEventHelper {
 
                         recargarTablaMatriculas(modelM, session, estudianteDAO);
 
-
                     }
                    
                 }catch (Exception ex) {
@@ -240,8 +244,6 @@ public class OnClickEventHelper {
                 } finally {
                     session.close();
                 }
-
-
             }
 
             @Override
@@ -251,7 +253,4 @@ public class OnClickEventHelper {
             }
         });
     }
-
-    
-
 }
