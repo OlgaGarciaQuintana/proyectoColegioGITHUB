@@ -91,20 +91,6 @@ public class OnClickEventHelper {
 
                         String nombre = nombreEstudiante.getText();
                         String edadTexto = edadEstudiante.getText();
-
-                        String comprobarNombre = "^[a-zA-Z]+$";
-                        String comprobarEdad = "^\\d+$";
-
-                        if (nombre.length()==0) {
-                            JOptionPane.showMessageDialog(nombreEstudiante, "El nombre esta vacio");
-                        } else if (edadTexto.length()==0) {
-                            JOptionPane.showMessageDialog(edadEstudiante, "La edad esta vacia");
-                        } else if (!nombre.matches(comprobarNombre)) {
-                            JOptionPane.showMessageDialog(nombreEstudiante, "El nombre tiene que tener letras");
-                        } else if (!edadTexto.matches(comprobarEdad)) {
-                            JOptionPane.showMessageDialog(edadEstudiante, "La edad tiene que tener numeros");
-                        } else {
-
                         int edad = Integer.parseInt(edadTexto);
 
                         estudiante = new Estudiante(nombre, edad);
@@ -114,31 +100,14 @@ public class OnClickEventHelper {
                         edadEstudiante.setText("");
 
                         recargarTablaEstudiantes(modelE, session, estudianteDAO);
-                        }
 
                     //ACTUALIZAR ESTUDIANTE:
                     } else if (button.getText().equals("Actualizar E")) {
 
                         String idTexto = idEstudiante.getText();
+                        int idE = Integer.parseInt(idTexto);
                         String nombre = nombreEstudiante.getText();
                         String edadTexto = edadEstudiante.getText();
-
-                        String comprobarNombre = "^[a-zA-Z]+$";
-                        String comprobarEdad = "^\\d+$";
-
-                        if (idTexto.length()==0) {
-                            JOptionPane.showMessageDialog(idEstudiante, "El id esta vacio");
-                        } else if (nombre.length()==0) {
-                            JOptionPane.showMessageDialog(nombreEstudiante, "El nombre esta vacio");
-                        } else if (edadTexto.length()==0) {
-                            JOptionPane.showMessageDialog(edadEstudiante, "La edad esta vacia");
-                        } else if (!nombre.matches(comprobarNombre)) {
-                            JOptionPane.showMessageDialog(nombreEstudiante, "El nombre tiene que tener letras");
-                        } else if (!edadTexto.matches(comprobarEdad)) {
-                            JOptionPane.showMessageDialog(edadEstudiante, "La edad tiene que tener numeros");
-                        } else {
-
-                        int idE = Integer.parseInt(idTexto);
                         int edad = Integer.parseInt(edadTexto);
 
                         estudiante = estudianteDAO.selectEstudianteById(session, idE);
@@ -153,17 +122,12 @@ public class OnClickEventHelper {
                         edadEstudiante.setText("");
 
                         recargarTablaEstudiantes(modelE, session, estudianteDAO);
-                        }
+
 
                     //BORRAR ESTUDIANTE:
                     } else if (button.getText().equals("Borrar E")) {
 
                          String idTexto = idEstudiante.getText();
-
-                        if (idTexto.length()==0) {
-                            JOptionPane.showMessageDialog(idEstudiante, "El id esta vacio");
-                        } else {
-
                          int idE = Integer.parseInt(idTexto);
 
                          estudianteDAO.deleteEstudiante(session, idE);
@@ -175,27 +139,12 @@ public class OnClickEventHelper {
                          recargarTablaEstudiantes(modelE, session, estudianteDAO);
 
                          recargarTablaMatriculas(modelM, session, estudianteDAO);
-                        }
 
                     //INSERTAR CURSO:
                     }  else if (button.getText().equals("Insertar C")) {
 
                          String nombre = nombreCurso.getText();
                          String duracionTexto = duracionCurso.getText();
-
-                         String comprobarNombre = "^[a-zA-Z]+$";
-                         String comprobarDuracion = "^\\d+$";
-
-                        if (nombre.length()==0) {
-                            JOptionPane.showMessageDialog(nombreCurso, "El nombre esta vacio");
-                        } else if (duracionTexto.length()==0) {
-                            JOptionPane.showMessageDialog(duracionCurso, "La duracion esta vacia");
-                        } else if (!nombre.matches(comprobarNombre)) {
-                            JOptionPane.showMessageDialog(nombreCurso, "El nombre tiene que tener letras");
-                        } else if (!duracionTexto.matches(comprobarDuracion)) {
-                            JOptionPane.showMessageDialog(duracionCurso, "La duracion tiene que tener numeros");
-                        } else {
-
                          int duracion = Integer.parseInt(duracionTexto);
 
                          curso = new Curso(nombre, duracion);
@@ -205,31 +154,14 @@ public class OnClickEventHelper {
                          duracionCurso.setText("");
 
                          recargarTablaCursos(modelC, session, cursoDAO);
-                        }
 
                     //ACTUALIZAR CURSO:
                     } else if (button.getText().equals("Actualizar C")) {
 
                         String idTexto = idCurso.getText();
+                        int idC = Integer.parseInt(idTexto);
                         String nombre = nombreCurso.getText();
                         String duracionTexto = duracionCurso.getText();
-
-                        String comprobarNombre = "^[a-zA-Z]+$";
-                        String comprobarDuracion = "^\\d+$";
-
-                        if (idTexto.length()==0) {
-                            JOptionPane.showMessageDialog(idCurso, "El id esta vacio");
-                        } else if (nombre.length()==0) {
-                            JOptionPane.showMessageDialog(nombreCurso, "El nombre esta vacio");
-                        } else if (duracionTexto.length()==0) {
-                            JOptionPane.showMessageDialog(duracionCurso, "La duracion esta vacia");
-                        } else if (!nombre.matches(comprobarNombre)) {
-                            JOptionPane.showMessageDialog(nombreCurso, "El nombre tiene que tener letras");
-                        } else if (!duracionTexto.matches(comprobarDuracion)) {
-                            JOptionPane.showMessageDialog(duracionCurso, "La duracion tiene que tener numeros");
-                        } else {
-
-                        int idC = Integer.parseInt(idTexto);
                         int duracion = Integer.parseInt(duracionTexto);
 
                         curso = cursoDAO.selectCursoById(session, idC);
@@ -244,17 +176,11 @@ public class OnClickEventHelper {
                         duracionCurso.setText("");
 
                         recargarTablaCursos(modelC, session, cursoDAO);
-                        }
 
                     //BORRAR CURSO:
                     } else if (button.getText().equals("Borrar C")) {
 
                         String idTexto = idCurso.getText();
-
-                        if (idTexto.length()==0) {
-                            JOptionPane.showMessageDialog(idCurso, "El id esta vacio");
-                        } else {
-
                         int idC = Integer.parseInt(idTexto);
 
                         cursoDAO.deleteCurso(session, idC);
@@ -268,21 +194,14 @@ public class OnClickEventHelper {
                         session.clear();
 
                         recargarTablaMatriculas(modelM, session, estudianteDAO);
-                        }
 
                     //INSERTAR MATRICULA:
                     } else if (button.getText().equals("Insertar M")) {
 
                         String idEMTexto = idEstudianteM.getText();
-                        String idCMTexto = idCursoM.getText();
-
-                        if (idEMTexto.length()==0) {
-                            JOptionPane.showMessageDialog(idEstudianteM, "El id del estudiante esta vacio");
-                        } else if (idCMTexto.length()==0) {
-                            JOptionPane.showMessageDialog(idCursoM, "El id del curso esta vacio");
-                        } else {
-
                         int idEM = Integer.parseInt(idEMTexto);
+
+                        String idCMTexto = idCursoM.getText();
                         int idCM = Integer.parseInt(idCMTexto);
 
                         Estudiante estudianteElegido = estudianteDAO.selectEstudianteById(session, idEM);
@@ -296,21 +215,14 @@ public class OnClickEventHelper {
                         idCursoM.setText("");
 
                         recargarTablaMatriculas(modelM, session, estudianteDAO);
-                        }
 
                     //BORRAR MATRICULA:
                     } else if (button.getText().equals("Borrar M")) {
 
                         String idEMTexto = idEstudianteM.getText();
-                        String idCMTexto = idCursoM.getText();
-
-                        if (idEMTexto.length()==0) {
-                            JOptionPane.showMessageDialog(idEstudianteM, "El id del estudiante esta vacio");
-                        } else if (idCMTexto.length()==0) {
-                            JOptionPane.showMessageDialog(idCursoM, "El id del curso esta vacio");
-                        } else {
-
                         int idEM = Integer.parseInt(idEMTexto);
+
+                        String idCMTexto = idCursoM.getText();
                         int idCM = Integer.parseInt(idCMTexto);
 
                         Estudiante estudianteElegido = estudianteDAO.selectEstudianteById(session, idEM);
@@ -321,7 +233,6 @@ public class OnClickEventHelper {
                         transaction.commit();
 
                         recargarTablaMatriculas(modelM, session, estudianteDAO);
-                        }
 
                     }
                    

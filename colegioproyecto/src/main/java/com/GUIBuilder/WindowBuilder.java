@@ -85,24 +85,6 @@ public class WindowBuilder {
      el8.setForeground(Color.decode("#000"));
      panel.add(el8);
 
-     JLabel el9 = new JLabel("Estudiantes:");
-     el9.setBounds(35, 10, 150, 18);
-     el9.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     el9.setForeground(Color.decode("#000"));
-     panel.add(el9);
-
-     JLabel el10 = new JLabel("Matriculas:");
-     el10.setBounds(314, 10, 150, 18);
-     el10.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     el10.setForeground(Color.decode("#000"));
-     panel.add(el10);
-
-     JLabel el11 = new JLabel("Cursos:");
-     el11.setBounds(602, 10, 150, 18);
-     el11.setFont(CustomFontLoader.loadFont("./resources/fonts/Lexend.ttf", 14));
-     el11.setForeground(Color.decode("#000"));
-     panel.add(el11);
-
      //VALORES DE ESTUDIANTE / CURSO / MATRICULA:
 
      JTextField idEstudiante = new JTextField("");
