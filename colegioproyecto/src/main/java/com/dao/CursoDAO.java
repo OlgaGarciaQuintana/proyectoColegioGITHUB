@@ -13,15 +13,21 @@ import jakarta.transaction.Transaction;
 
 public class CursoDAO {
 
+	//INSERTAR CURSO:
+
     public void insertarCurso(Session session, Curso c) {
 		session.persist(c);
 		System.out.println("Curso insertado");
 	}
 	
+	//ACTUALIZAR CURSO:
+
 	public void actualizarCurso(Session session, Curso c) {
 		session.merge(c);
 		System.out.println("Curso actualizado");
 	}
+
+	//BORRAR CURSO:
 	
 	public void deleteCurso(Session session, int idcurso) {
 		Curso c = session.get(Curso.class, idcurso);
@@ -31,10 +37,13 @@ public class CursoDAO {
 		}
 	}
 
+	//SELECCIONAR SOLO UN CURSO:
+
 	public Curso selectCursoById(Session session, int idcurso) {
 		return session.get(Curso.class, idcurso);
 	}
 	
+	//SELECCIONAR TODOS LOS CURSOS:
 	
 	public List<Curso> selectAllCursos(Session session) {
 		return session.createQuery("FROM Curso", Curso.class).list();
