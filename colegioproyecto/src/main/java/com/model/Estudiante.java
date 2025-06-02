@@ -24,8 +24,6 @@ import lombok.Setter;
 @Setter
 public class Estudiante {
 
-	
-    
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idestudiante")
@@ -51,29 +49,7 @@ public class Estudiante {
 		super();
 	}
 
-	public int getIdestudiante() {
-		return idestudiante;
-	}
-
-	public void setIdestudiante(int idestudiante) {
-		this.idestudiante = idestudiante;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public int getEdad() {
-		return edad;
-	}
-
-	public void setEdad(int edad) {
-		this.edad = edad;
-	}
+	//AÑADIR UN CURSO A UN ESTUDIANTE:
 
 	public void añadirCurso(Curso c) {
 		cursos.add(c);

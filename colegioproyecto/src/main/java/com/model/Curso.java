@@ -52,34 +52,14 @@ public class Curso {
 		super();
 	}
 
-	public int getIdcurso() {
-		return idcurso;
-	}
-
-	public void setIdcurso(int idcurso) {
-		this.idcurso = idcurso;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public int getDuracion() {
-		return duracion;
-	}
-
-	public void setDuracion(int duracion) {
-		this.duracion = duracion;
-	}
+	//AÑADIR UN ESTUDIANTE A UN CURSO:
 
 	public void añadirEstudiante(Estudiante e) {
 		estudiantes.add(e);
 		e.getCursos().add(this);
 	}
+
+	//QUITAR UN ESTUDIANTE DE UN CURSO:
 
 	public void quitarEstudiante(Estudiante e) {
 		estudiantes.remove(e);
